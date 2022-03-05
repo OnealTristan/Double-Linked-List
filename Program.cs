@@ -9,7 +9,7 @@ namespace Program
 	class Program
 	{
 		Node head;
-		class Node
+		public class Node
 		{
 			public int data;
 			public Node next;
@@ -20,6 +20,9 @@ namespace Program
 			}
 		}
 
+
+		// -----FUNGSI INSERTION-----
+		// FUNGSI INSERTION (At the end)
 		public void AddNode (int d)
 		{
 			Node node = new Node(d);
@@ -42,6 +45,7 @@ namespace Program
 			}
 		}
 
+		// FUNGSI INSERTION AT THE BEGINNING
 		public void InsertHead (int d)
 		{
 			Node node = new Node(d);
@@ -52,6 +56,46 @@ namespace Program
 				head.prev = node;
 			}
 			head = node;
+		}
+
+		// FUNGSI INSERTION AT INDEX : N
+		public void InsertAfter (Node p_Node, int d)
+		{
+			Node node = new Node(d);
+			if (p_Node == null)
+			{
+				Console.WriteLine("Node sebelumnya tidak boleh kosong");
+				return;
+			}
+			node.next = p_Node.next;
+			p_Node.next = node;
+			node.prev = p_Node;
+			if (node.next != null)
+			{
+				node.next.prev = node;
+			}
+		}
+
+
+		// -----FUNGSI DELETE-----
+		// FUNGSI DELETE AT THE BEGINNING
+		public void DeleteHead ()
+		{
+			if (head != null)
+			{
+				Node temp = head;
+				head = head.next;
+				temp = null;
+				if(head != null)
+				{
+					head.prev = null;
+				}
+			}
+		}
+
+		public void DeleteLast ()
+		{
+
 		}
 
 		public void PrintList (Node node)
@@ -70,12 +114,28 @@ namespace Program
 			Program node = new Program();
 			Console.Write("Masukkan Banyak Node : ");
 			int input = Convert.ToInt32(Console.ReadLine());
+
+			// Looping Node
 			for (int i = 1; i <= input; i++)
 			{
 				node.AddNode(i);
 			}
-			node.InsertHead(1);
+
+			// Insertion In The Beginning
+			node.InsertHead(7);
+
+			// Insertion At The End
+			node.AddNode(5);
+
+			//Insertion at index : n
+			//node.InsertAfter(node.head,5)
+
+			// Delete In The Beginning
+			node.DeleteHead();
+
+			// Print All Node
 			node.PrintList(node.head);
+			Console.ReadKey();
 		}
 	}
 }
