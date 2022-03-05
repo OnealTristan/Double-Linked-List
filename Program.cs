@@ -8,6 +8,7 @@ namespace Program
 {
 	class Program
 	{
+		Node head;
 		class Node
 		{
 			public int data;
@@ -16,56 +17,57 @@ namespace Program
 			public Node (int d)
 			{
 				data = d;
-				next = null;
-				prev = null;
 			}
 		}
 
-		class LinkedList
+		public void AddNode (int d)
 		{
-			public Node head;
-			public void AddNode (int d)
+			Node node = new Node(d);
+			Node temp = head;
+			node.next = null;
+			if (head == null)
 			{
-				Node node = new Node(d);
-				if (head == null)
-				{
-					node.prev = null;
-					head = node;
-				}
-				else
-				{
-					Node temp = head;
-					while (temp.next != null)
-					{
-						temp = temp.next;
-					}
-					temp.next = node;
-					node.prev = temp;
-				}
-				Console.Write(node.data);
-			}
-			public void InsertHead (int d)
-			{
-				Node node = new Node(d);
-				node.next = head;
 				node.prev = null;
-				if (head != null)
-				{
-					head.prev = node;
-				}
 				head = node;
-				Console.Write(head.data);
+				return;
 			}
-			public void InsertEnd (int d)
+			else
 			{
-				Node node = new Node(d);
-				node.next = node;
-				Console.Write(node.next);
+				while (temp.next != null)
+				{
+					temp = temp.next;
+				}
+				temp.next = node;
+				node.prev = temp;
 			}
 		}
+
+		public void InsertHead (int d)
+		{
+			Node node = new Node(d);
+			node.next = head;
+			node.prev = null;
+			if (head != null)
+			{
+				head.prev = node;
+			}
+			head = node;
+		}
+
+		public void PrintList (Node node)
+		{
+			Node temp = null;
+			while (node != null)
+			{
+				Console.Write(node.data);
+				temp = node;
+				node = node.next;
+			}
+		}
+
 		static void Main(string[] args)
 		{
-			LinkedList node = new LinkedList();
+			Program node = new Program();
 			Console.Write("Masukkan Banyak Node : ");
 			int input = Convert.ToInt32(Console.ReadLine());
 			for (int i = 1; i <= input; i++)
@@ -73,7 +75,7 @@ namespace Program
 				node.AddNode(i);
 			}
 			node.InsertHead(1);
-			Console.ReadKey();
+			node.PrintList(node.head);
 		}
 	}
 }
