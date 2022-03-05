@@ -59,20 +59,36 @@ namespace Program
 		}
 
 		// FUNGSI INSERTION AT INDEX : N
-		public void InsertAfter (Node p_Node, int d)
+		public void InsertAfter (int p_Node, int d)
 		{
 			Node node = new Node(d);
-			if (p_Node == null)
+			node.data = d;
+			node.next = null;
+			node.prev = null;
+			if (p_Node == 0)
 			{
-				Console.WriteLine("Node sebelumnya tidak boleh kosong");
-				return;
+				Console.WriteLine("Node harus lebih dari sama dengan 1");
 			}
-			node.next = p_Node.next;
-			p_Node.next = node;
-			node.prev = p_Node;
-			if (node.next != null)
+			else
 			{
-				node.next.prev = node;
+				Node temp = head;
+				for (int i = 1; i < p_Node-1; i++)
+				{
+					if(temp !=null)
+					{
+						temp = temp.next;
+					}
+				}
+				if (temp != null)
+				{
+					node.next = temp.next;
+					node.prev = temp;
+					temp.next = node;
+					if(node.next != null)
+					{
+						node.next.prev = node;
+					}
+				}
 			}
 		}
 
@@ -93,10 +109,56 @@ namespace Program
 			}
 		}
 
+		// FUNGSI DELETE IN THE LAST
 		public void DeleteLast ()
 		{
-
+			if (head != null)
+			{
+				if (head.next == null)
+				{
+					head = null;
+				}
+				else
+				{
+					Node temp = head;
+				}
+			}
 		}
+
+		// FUNGSI DELETE AT INDEX : N
+		public void DeleteAt (int p_Node)
+		{
+			if (p_Node < 1)
+			{
+				Console.WriteLine("Posisi hapus node harus lebih dari 1");
+			}
+			else
+			{
+				Node temp = head;
+				for (int i = 1; i < p_Node-1; i++)
+				{
+					if(temp !=null)
+					{
+						temp = temp.next;
+					}
+				}
+				if (temp != null && temp.next != null)
+				{
+					Node delete = temp.next;
+					temp.next = temp.next.next; 
+					if(temp.next.next != null)
+					{
+						temp.next.next.prev = temp.next;
+					}
+					delete = null;
+				}
+				else 
+				{
+					Console.Write("\nNode sudah null");
+				}
+			}
+		}
+
 
 		public void PrintList (Node node)
 		{
@@ -122,16 +184,22 @@ namespace Program
 			}
 
 			// Insertion In The Beginning
-			node.InsertHead(7);
+			//node.InsertHead(7);
 
 			// Insertion At The End
-			node.AddNode(5);
+			//node.AddNode(5);
 
 			//Insertion at index : n
-			//node.InsertAfter(node.head,5)
+			//node.InsertAfter(1,2);
 
 			// Delete In The Beginning
-			node.DeleteHead();
+			//node.DeleteHead();
+
+			// Delete In The End
+			//node.DeleteLast();
+
+			// Delete at index : n
+			node.DeleteAt(4);
 
 			// Print All Node
 			node.PrintList(node.head);
