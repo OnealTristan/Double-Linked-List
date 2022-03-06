@@ -121,6 +121,13 @@ namespace Program
 				else
 				{
 					Node temp = head;
+					while (temp.next.next != null)
+					{
+						temp = temp.next;
+					}
+					Node last = temp.next;
+					temp.next = null;
+					last = null;
 				}
 			}
 		}
@@ -184,10 +191,10 @@ namespace Program
 			}
 
 			// Insertion In The Beginning
-			//node.InsertHead(7);
+			node.InsertHead(7);
 
 			// Insertion At The End
-			//node.AddNode(5);
+			node.AddNode(10);
 
 			//Insertion at index : n
 			//node.InsertAfter(1,2);
@@ -196,10 +203,10 @@ namespace Program
 			//node.DeleteHead();
 
 			// Delete In The End
-			//node.DeleteLast();
+			node.DeleteLast();
 
 			// Delete at index : n
-			node.DeleteAt(4);
+			//node.DeleteAt(4);
 
 			// Print All Node
 			node.PrintList(node.head);
