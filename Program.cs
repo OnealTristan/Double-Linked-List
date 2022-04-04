@@ -20,7 +20,6 @@ namespace Program
 			}
 		}
 
-
 		// -----FUNGSI INSERTION-----
 		// FUNGSI INSERTION (At the end)
 		public void AddNode (int d)
@@ -65,14 +64,14 @@ namespace Program
 			node.data = d;
 			node.next = null;
 			node.prev = null;
-			if (p_Node == 0)
+			if (p_Node < 0)
 			{
 				Console.WriteLine("Node harus lebih dari sama dengan 1");
 			}
 			else
 			{
 				Node temp = head;
-				for (int i = 1; i < p_Node-1; i++)
+				for (int i = 1; i < p_Node; i++)
 				{
 					if(temp !=null)
 					{
@@ -91,7 +90,6 @@ namespace Program
 				}
 			}
 		}
-
 
 		// -----FUNGSI DELETE-----
 		// FUNGSI DELETE AT THE BEGINNING
@@ -135,7 +133,7 @@ namespace Program
 		// FUNGSI DELETE AT INDEX : N
 		public void DeleteAt (int p_Node)
 		{
-			if (p_Node < 1)
+			if (p_Node < 0)
 			{
 				Console.WriteLine("Posisi hapus node harus lebih dari 1");
 			}
@@ -181,35 +179,48 @@ namespace Program
 		static void Main(string[] args)
 		{
 			Program node = new Program();
-			Console.Write("Masukkan Banyak Node : ");
+			Stack<Int32> st = new Stack<Int32>();
+			Console.Write("Masukkan Banyak No : ");
 			int input = Convert.ToInt32(Console.ReadLine());
 
 			// Looping Node
+			//for (int i = 1; i <= input; i++)
+			//{
+			//	node.AddNode(i);
+			//}
+
+			// Looping Stack
 			for (int i = 1; i <= input; i++)
 			{
-				node.AddNode(i);
+				st.Push(i);
+			}
+			st.Pop();
+			st.Pop();
+			foreach (int i in st)
+			{
+				Console.WriteLine(i);
 			}
 
 			// Insertion In The Beginning
-			node.InsertHead(7);
+			//node.InsertHead(7);
 
 			// Insertion At The End
-			node.AddNode(10);
+			//node.AddNode(10);
 
 			//Insertion at index : n
-			//node.InsertAfter(1,2);
+			//node.InsertAfter(5,50);
 
 			// Delete In The Beginning
 			//node.DeleteHead();
 
 			// Delete In The End
-			node.DeleteLast();
+			//node.DeleteLast();
 
 			// Delete at index : n
 			//node.DeleteAt(4);
 
 			// Print All Node
-			node.PrintList(node.head);
+			//node.PrintList(node.head);
 			Console.ReadKey();
 		}
 	}
